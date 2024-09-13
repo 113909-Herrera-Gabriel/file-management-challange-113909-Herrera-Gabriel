@@ -1,0 +1,41 @@
+<div class="container">
+    <div class="row mt-2">
+        <div class="col-6"><h1>Archivo</h1></div>
+        <div class="col-6"><div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Acciones
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Nuevo</a></li>
+                <li><a class="dropdown-item" (click)="borrar()" href="#">Borrar</a></li>
+            </ul>
+        </div></div>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Dueños</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for(file of files; track file){
+            <tr >
+                <td>
+                    <input type="checkbox" (change)="seleccionArchivo(file.id)">
+                </td>
+                <td>{{ (file.type === FileType ? '📄' : '📁') + file.name }}</td>
+                <td>{{ file.creation | date:'mediumDate' }}</td>
+                @for(owner of file.owners; track owner){
+                <td>
+                    <img  [src]="owner.avatarUrl" [alt]="owner.name"  width="50" height="50">
+                </td>
+                }
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
